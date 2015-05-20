@@ -58,14 +58,12 @@ and initilize `helm-default-info-index-list' variable."
          (when (file-readable-p dir-file)
            (with-temp-buffer
              (insert-file-contents dir-file)
-             (while (re-search-forward "^* \\(.+:\\) (\\([^)]+\\))\\.? *\\(\\(?:[^*]+\n\\)\n\\|[^*]+\\)" nil t)
+             (while (re-search-forward "^* +\\([^:]+:\\) +(\\([^)]+\\))\\(?:[^.]*\\.[ \n]+\\(?:\\(?3:.*\\)\n\n\\|\\(?3:[^*]+\\)\\)\\)?" nil t)
                (let ((title (match-string 1))
                      (file (match-string 2))
-                     (description (match-string 3)))
+                     (description (or (match-string 3) "")))
                  (add-to-list 'info-list (list title file
-                                               (replace-regexp-in-string "^[[:space:]]+" ""
-                                                                         (replace-regexp-in-string "[[:space:]]+$" ""
-                                                                                                   (replace-regexp-in-string "[[:space:]\n]+" " " description)))))))))))
+                                               (replace-regexp-in-string "[[:space:]\n][[:space:]\n]+" " " description)))))))))
      (or (eval (intern-soft "Info-directory-list"))
          (eval (intern-soft "Info-default-directory-list"))
          (when (getenv "INFOPATH")
