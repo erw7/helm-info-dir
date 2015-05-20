@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015 erw7.github@gmail.com
 
 ;; Author: erw7.github@gmail.com
-;; URL: https://github.com/erw7/helm-summarye
+;; URL: https://github.com/erw7/helm-info-dir
 ;; Version: 0.01
 ;; Requires : ((helm "1.5.6") (info ""))
 
